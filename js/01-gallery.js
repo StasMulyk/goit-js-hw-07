@@ -25,8 +25,11 @@ itemsOnList.addEventListener('click', modalShow);
 
 function modalShow(event) {
     event.preventDefault();
-    const modalWindow = basicLightbox.create(
-        `<img src="${event.target.dataset.source}" width="800" height="600">`);
+    if (event.target.nodeName !== "img") { return; };
+    {
+        const modalWindow = basicLightbox.create(
+            `<img src="${event.target.dataset.source}" width="800" height="600">`);
         modalWindow.show()
     
+    }
 };

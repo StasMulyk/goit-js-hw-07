@@ -2,24 +2,27 @@ import { galleryItems } from './gallery-items.js';
 // Change code below this line
 
 console.log(galleryItems);
+const imgGallery = document.querySelector('.gallery');
+console.log(imgGallery);
 
-const gallery = document.querySelector('.gallery');
+const listImages = galleryItems.map(item => `<div class='gallery__item'>
+    <a class="gallery__link" href=${item.original}>
+        <img class='gallery__image'
+         src = ${item.preview}
+         alt = ${item.description}/></a> </div>`).join('');
+console.log(listImages)
 
-function createGalleryItems(newGalleryItems) {
-    return newGalleryItems.map(({ preview, original, description }) =>
-        `<a class="gallery__item" href=${original}>
-    <img class="gallery__image"
-    src=${preview}
-    alt=${description}>
-    </a>`).join("");
+imgGallery.innerHTML = listImages;
+
+imgGallery.addEventListener('click', showModal);
+
+const lightbox = new SimpleLightbox('.gallery a', {captions: true, captionSelector: 'img', captionsData: 'alt', captionDelay: 250});
+
+function showModal(event) {
+    if (event.target.nodeName !== 'IMG') {
+        return;
+    }
+
+    console.log(event.target)
+    event.preventDefault();
 }
-
-gallery.innerHTML = createGalleryItems(galleryItems);
-
-var lightbox = new SimpleLightbox('.gallery a', {
-    captionClass: 'gallery__image',
-    captionsData: 'alt',
-    captionDelay: '250'
-});
-
-console.log(lightbox)
