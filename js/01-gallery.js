@@ -49,3 +49,4 @@ function click2(event) {
         instance.close(window.removeEventListener('click', click2));
     }
 }
+/
